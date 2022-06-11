@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main ()
+{
+ 
+  FILE *fp;   //定义文件指针 
+  int n,i;  
+ int nums[1000];
+   int sum = 0;   //初始和为0
+   int max = nums[i];//最大值最初必为数组第一个元素
+  if((fp=fopen("F:\\挑战作业f505-Yangling.txt","w+"))==NULL)  //建立新文本文件进行读或写 
+  {
+        printf("File open  error!\n");
+        exit(0);
+  }
+   scanf("%d\n",&n);     //输入一维数组中元素的个数 
+   fprintf(fp,"%d\n",n);
+    
+   for(i=0;i<n;i++)
+        scanf("%d",&nums[i]);
+        fprintf(fp,"%d",nums[i]);
+   
+    for(i=0;i<n;i++)
+    {
+        sum = sum + nums[i];  //遍历一个元素，累加一次 
+    
+        if(sum < nums[i])//如果加上当前元素之后的和比当前元素还小，则舍弃之前的元素，从当前元素开始累加
+        {
+            sum = nums[i];
+        }
+        //如果加上当前元素之后的和比当前元素大
+        //说明可以继续累加
+        //如果当前和比最大值大，则更新最大值为当前和
+        //否则，不做更新
+        if(sum > max)
+        {
+            max = sum;
+        }
+        
+    } 
+  fprintf (fp,"\n%d",max);
+ 
+  
+  if(fclose(fp))
+  {
+        printf("Can not close the file!\n");
+        exit(0);
+  }
+   return 0;
+}
